@@ -2,7 +2,7 @@ const axios = require('axios');
 const log = require('electron-log');
 
 const createApiClient = () => {
-  const baseURL = process.env.BACKEND_URL || 'http://localhost:8080';
+  const baseURL = process.env.BACKEND_URL || 'http://localhost:8081';
   const token = process.env.BACKEND_AUTH_TOKEN;
   const apiKey = process.env.BACKEND_API_KEY;
 
