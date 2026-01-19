@@ -1,0 +1,18 @@
+server:
+  port: 8080
+
+spring:
+  application:
+    name: ai-backend
+
+ai:
+  base-url: ${AI_BASE_URL:https://api.openai.com}
+  model: ${AI_MODEL:gpt-4o-mini}
+  api-key: ${AI_API_KEY:}
+  system-prompt: "请优先调用工具获取实时信息，再给出回答。"
+  connect-timeout: 15
+  read-timeout: 60
+
+search:
+  endpoint: ${SEARCH_ENDPOINT:https://api.bing.microsoft.com/v7.0/search}
+  api-key: ${SEARCH_API_KEY:}
