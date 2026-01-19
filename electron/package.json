@@ -7,7 +7,7 @@
     "dev:renderer": "vite",
     "build:renderer": "vite build",
     "start": "electron .",
-    "dev": "VITE_DEV_SERVER_URL=http://localhost:5173 electron .",
+    "dev": "$env:VITE_DEV_SERVER_URL='http://localhost:5173'; electron .",
     "pack": "electron-builder"
   },
   "dependencies": {

@@ -1,18 +1,30 @@
 server:
   port: 8081
+  servlet:
+    encoding:
+      charset: UTF-8
+      enabled: true
+      force: true
 
 spring:
   application:
     name: ai-backend
+  http:
+    encoding:
+      charset: UTF-8
+      enabled: true
+      force: true
+      force-request: true
+      force-response: true
 
 ai:
   base-url: ${AI_BASE_URL:https://api.deepseek.com}
   model: ${AI_MODEL:deepseek-chat}
   api-key: ${AI_API_KEY:sk-fc6537d4df484fe4a4de00180efd2b54}
-  system-prompt: "请优先调用工具获取实时信息，再给出回答。"
+  system-prompt: "请优先调用工具获取实时信息，再给出回答。请严格返回自然语言，不要返回任何DSML格式或特殊标记格式。"
   connect-timeout: 15
   read-timeout: 60
 
 search:
-  endpoint: ${SEARCH_ENDPOINT:https://api.bing.microsoft.com/v7.0/search}
+  endpoint: ${SEARCH_ENDPOINT:https://www.baidu.com/s}
   api-key: ${SEARCH_API_KEY:}

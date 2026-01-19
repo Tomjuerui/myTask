@@ -22,15 +22,15 @@ const createWindow = () => {
     }
   });
 
-  if (process.env.VITE_DEV_SERVER_URL) {
-    win.loadURL(process.env.VITE_DEV_SERVER_URL).catch((error) => {
-      log.error('Failed to load dev server', error);
-    });
-  } else {
-    win.loadFile(path.join(__dirname, '..', '..', 'dist', 'renderer', 'index.html')).catch((error) => {
-      log.error('Failed to load renderer HTML', error);
-    });
-  }
+  win.webContents.openDevTools();
+
+  // 强制设置为开发模式，以便显示更多错误信息
+  process.env.NODE_ENV = 'development';
+
+  // 直接加载生产构建的文件
+  win.loadFile(path.join(__dirname, '..', '..', 'dist', 'renderer', 'index.html')).catch((error) => {
+    log.error('Failed to load renderer HTML', error);
+  });
 
   return win;
 };
