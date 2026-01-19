@@ -73,8 +73,7 @@ public class LLMService {
     payload.put("model", model);
     payload.put("messages", List.of(
         Map.of("role", "system", "content", systemPrompt),
-        Map.of("role", "user", "content", question)
-    ));
+        Map.of("role", "user", "content", question)));
     payload.put("tools", buildTools());
     payload.put("tool_choice", "auto");
 
@@ -99,7 +98,8 @@ public class LLMService {
     for (JsonNode toolCall : toolCalls) {
       String toolName = toolCall.path("function").path("name").asText();
       String arguments = toolCall.path("function").path("arguments").asText();
-      Map<String, Object> args = objectMapper.readValue(arguments, new TypeReference<>() {});
+      Map<String, Object> args = objectMapper.readValue(arguments, new TypeReference<Map<String, Object>>() {
+      });
       String result = executeTool(toolName, args);
       Map<String, Object> toolMessage = new HashMap<>();
       toolMessage.put("role", "tool");
@@ -169,12 +169,8 @@ public class LLMService {
             "parameters", Map.of(
                 "type", "object",
                 "properties", Map.of(
-                    "query", Map.of("type", "string", "description", "搜索关键词")
-                ),
-                "required", List.of("query")
-            )
-        )
-    ));
+                    "query", Map.of("type", "string", "description", "搜索关键词")),
+                "required", List.of("query")))));
     tools.add(Map.of(
         "type", "function",
         "function", Map.of(
@@ -183,12 +179,8 @@ public class LLMService {
             "parameters", Map.of(
                 "type", "object",
                 "properties", Map.of(
-                    "expr", Map.of("type", "string", "description", "数学表达式")
-                ),
-                "required", List.of("expr")
-            )
-        )
-    ));
+                    "expr", Map.of("type", "string", "description", "数学表达式")),
+                "required", List.of("expr")))));
     return tools;
   }
 
